@@ -27,31 +27,104 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Base utility classes for nice gear loading animations if needed later */
+/* ==================== GEAR ANIMATIONS ==================== */
+
+/* Slow spin for decorative gears */
 @keyframes spin-slow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 4s linear infinite;
 }
 
-.animate-spin-slow {
-  animation: spin-slow 3s linear infinite;
+/* Counter-clockwise spin for meshed gears */
+@keyframes spin-slow-reverse {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
 }
+.animate-spin-slow-reverse {
+  animation: spin-slow-reverse 4s linear infinite;
+}
+
+/* Pulsing gear for loading states */
+@keyframes gear-pulse {
+  0%, 100% { transform: rotate(0deg) scale(1); opacity: 1; }
+  50% { transform: rotate(180deg) scale(1.05); opacity: 0.8; }
+}
+.animate-gear-pulse {
+  animation: gear-pulse 2s ease-in-out infinite;
+}
+
+/* Chain link moving animation */
+@keyframes chain-move {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-chain-move {
+  animation: chain-move 3s linear infinite;
+}
+
+/* ==================== LOADING ANIMATIONS ==================== */
+
+/* Fade in animation for page content */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Staggered fade in for child elements */
+.stagger-children > * {
+  opacity: 0;
+  animation: fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.25s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(7) { animation-delay: 0.35s; }
+.stagger-children > *:nth-child(8) { animation-delay: 0.4s; }
+
+/* Shimmer loading effect */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 50%,
+    #f0f0f0 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* ==================== MARQUEE ==================== */
 
 @keyframes marquee {
   0% { transform: translateX(0%); }
   100% { transform: translateX(-33.33%); }
 }
-
 .animate-marquee {
   animation: marquee 20s linear infinite;
   width: max-content;
 }
 
-/* Custom Accents */
+/* ==================== BRAND GRADIENTS ==================== */
+
 .bg-brand-gradient {
   background: linear-gradient(135deg, var(--color-brand-yellow), var(--color-brand-green));
 }
@@ -60,4 +133,40 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* ==================== DECORATIVE ELEMENTS ==================== */
+
+/* Floating particles */
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33% { transform: translateY(-10px) rotate(5deg); }
+  66% { transform: translateY(5px) rotate(-3deg); }
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Subtle scale-in for cards appearing */
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.animate-scale-in {
+  animation: scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Toploader override for brand colors */
+#nprogress .bar {
+  background: linear-gradient(90deg, var(--color-brand-yellow), var(--color-brand-green)) !important;
+  height: 3px !important;
+}
+#nprogress .peg {
+  box-shadow: 0 0 10px var(--color-brand-yellow), 0 0 5px var(--color-brand-green) !important;
 }

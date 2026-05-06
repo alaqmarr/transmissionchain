@@ -22,12 +22,69 @@ const HERO_SLIDES = [
   }
 ];
 
+function HeroGearDecoration() {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-[5]">
+      {/* Large gear bottom-right */}
+      <svg
+        className="absolute -bottom-20 -right-20 animate-spin-slow opacity-[0.06]"
+        width="400"
+        height="400"
+        viewBox="0 0 100 100"
+        fill="none"
+      >
+        <g transform="translate(50,50)">
+          {Array.from({ length: 14 }).map((_, i) => (
+            <rect key={i} x="-4" y="-48" width="8" height="11" rx="2" fill="white" transform={`rotate(${i * (360 / 14)})`} />
+          ))}
+          <circle r="37" fill="white" />
+          <circle r="30" fill="transparent" stroke="white" strokeWidth="1" />
+          <circle r="10" fill="white" />
+          <circle r="5" fill="transparent" />
+        </g>
+      </svg>
+
+      {/* Medium gear top-right */}
+      <svg
+        className="absolute -top-10 right-32 animate-spin-slow-reverse opacity-[0.04]"
+        width="220"
+        height="220"
+        viewBox="0 0 100 100"
+        fill="none"
+      >
+        <g transform="translate(50,50)">
+          {Array.from({ length: 10 }).map((_, i) => (
+            <rect key={i} x="-5" y="-48" width="10" height="13" rx="2" fill="white" transform={`rotate(${i * 36})`} />
+          ))}
+          <circle r="35" fill="white" />
+          <circle r="26" fill="transparent" />
+          <circle r="8" fill="white" />
+        </g>
+      </svg>
+
+      {/* Chain link decoration bottom */}
+      <div className="absolute bottom-24 left-0 right-0 flex justify-center overflow-hidden opacity-[0.05]">
+        <div className="animate-chain-move flex">
+          {Array.from({ length: 50 }).map((_, i) => (
+            <div key={i} className="flex-shrink-0 w-6 h-3 border border-white rounded-sm mx-0.5" />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function HeroCarousel() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+        setIsTransitioning(false);
+      }, 300);
     }, 5000);
     return () => clearInterval(timer);
   }, []);
@@ -54,9 +111,12 @@ export default function HeroCarousel() {
         </div>
       ))}
 
+      {/* Gear Decorations */}
+      <HeroGearDecoration />
+
       {/* Content Overlay */}
       <div className="relative z-10 container mx-auto px-4 lg:px-8 h-full flex flex-col justify-center">
-        <div className="max-w-4xl animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300 fill-mode-both">
+        <div className={`max-w-4xl transition-all duration-500 ${isTransitioning ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"}`}>
           <h1 className="text-5xl md:text-7xl font-extrabold mb-8 leading-[1.1] tracking-tighter text-white">
             {HERO_SLIDES[currentSlide].title.split("Quality Transmission").map((part, i, arr) => (
               <span key={i}>

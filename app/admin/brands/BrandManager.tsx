@@ -119,7 +119,7 @@ export default function BrandManager({ initialBrands }: { initialBrands: any[] }
               <label className="block text-sm font-medium mb-1">Logo / Image</label>
               {imageUrl ? (
                 <div className="relative w-full h-32 bg-gray-50 rounded border flex items-center justify-center overflow-hidden mb-2 p-2">
-                  <img src={imageUrl} alt="Uploaded" className="max-h-full max-w-full object-contain" />
+                  <img src={imageUrl} alt="Uploaded" className="w-full h-full object-cover" />
                   <button type="button" onClick={() => setImageUrl("")} className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1"><Trash2 className="w-4 h-4"/></button>
                 </div>
               ) : (
@@ -157,7 +157,7 @@ export default function BrandManager({ initialBrands }: { initialBrands: any[] }
                   <tr key={brand.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4">
                       {brand.image ? (
-                        <div className="w-12 h-12 bg-white border rounded flex items-center justify-center p-1"><img src={brand.image} className="max-w-full max-h-full object-contain" /></div>
+                        <div className="w-12 h-12 bg-white border rounded flex items-center justify-center overflow-hidden"><img src={brand.image} className="w-full h-full object-cover" /></div>
                       ) : (
                         <div className="w-12 h-12 bg-gray-100 border rounded flex items-center justify-center text-xs text-gray-400">N/A</div>
                       )}

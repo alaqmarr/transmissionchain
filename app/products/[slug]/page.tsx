@@ -144,10 +144,10 @@ export default async function ProductDetailPage({ params }: Props) {
         <div className="bg-white rounded-3xl shadow-glass border border-gray-100 overflow-hidden relative">
           <div className="grid grid-cols-1 lg:grid-cols-2">
             {/* Images Section */}
-            <div className="p-8 lg:p-16 bg-slate-50 flex items-center justify-center relative min-h-[400px] lg:min-h-[600px] group">
-              <div className="absolute inset-0 bg-brand-yellow/0 group-hover:bg-brand-yellow/5 transition-colors duration-500"></div>
+            <div className="bg-slate-50 relative min-h-[400px] lg:min-h-[600px] group overflow-hidden">
+              <div className="absolute inset-0 bg-brand-yellow/0 group-hover:bg-brand-yellow/5 transition-colors duration-500 z-10"></div>
               {product.images && product.images.length > 0 ? (
-                <img src={product.images[0]} alt={product.name} className="max-w-full max-h-[500px] object-contain drop-shadow-xl group-hover:scale-105 transition-transform duration-700 mix-blend-multiply relative z-10" />
+                <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 relative" />
               ) : (
                 <div className="text-gray-400 font-medium">No image available</div>
               )}

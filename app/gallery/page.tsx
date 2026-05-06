@@ -45,12 +45,12 @@ export default async function GalleryPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
             {images.map((img) => (
               <div key={img.id} className="group relative rounded-2xl overflow-hidden shadow-glass hover:shadow-premium border border-white bg-white aspect-square flex flex-col hover:-translate-y-1 transition-all duration-300">
-                <div className="flex-1 flex items-center justify-center p-8 bg-slate-50 relative overflow-hidden">
+                <div className="flex-1 flex items-center justify-center bg-slate-50 relative overflow-hidden">
                   <div className="absolute inset-0 bg-brand-yellow/0 group-hover:bg-brand-yellow/5 transition-colors duration-500"></div>
                   <img 
                     src={img.imageUrl} 
-                    alt={img.caption || "Gallery item"} 
-                    className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-700 ease-out relative z-10 mix-blend-multiply"
+                    alt={img.caption || `Gallery Image ${img.id}`} 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out z-10"
                   />
                 </div>
                 {img.caption && (

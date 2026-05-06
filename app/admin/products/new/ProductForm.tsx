@@ -110,8 +110,8 @@ export default function ProductForm({ categories, brands, initialData }: { categ
             <label className="block text-sm font-medium mb-2">Product Images</label>
             <div className="flex flex-wrap gap-4 mb-4">
               {images.map((img, idx) => (
-                <div key={idx} className="relative w-24 h-24 bg-gray-50 border rounded-lg flex items-center justify-center p-1">
-                  <img src={img} className="max-w-full max-h-full object-contain" alt="Product" />
+                <div key={idx} className="relative w-24 h-24 bg-gray-50 border rounded-lg flex items-center justify-center p-1 overflow-hidden">
+                  <img src={img} className="w-full h-full object-cover rounded" alt="Product" />
                   <button type="button" onClick={() => removeImage(idx)} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 shadow hover:bg-red-600">
                     <X className="w-3 h-3" />
                   </button>

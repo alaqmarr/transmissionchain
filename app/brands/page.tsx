@@ -59,9 +59,9 @@ export default async function BrandsPage() {
               <Link href={`/brands/${brand.slug}`} key={brand.id} className="group">
                 <div className="bg-white rounded-3xl shadow-glass hover:shadow-premium border border-white overflow-hidden p-8 flex flex-col items-center text-center hover:-translate-y-2 transition-all duration-300 relative h-full">
                   <div className="absolute inset-0 bg-brand-yellow/0 group-hover:bg-brand-yellow/5 transition-colors duration-500 z-0"></div>
-                  <div className="w-28 h-28 mb-6 flex items-center justify-center rounded-2xl bg-slate-50 relative z-10 border border-gray-50">
+                  <div className="w-full h-40 mb-6 flex items-center justify-center bg-slate-50 relative z-10 overflow-hidden rounded-t-3xl -mx-8 -mt-8 border-b border-gray-50">
                     {brand.image ? (
-                      <img src={brand.image} alt={brand.name} className="max-w-[70%] max-h-[70%] object-contain group-hover:scale-110 transition-transform duration-500 mix-blend-multiply" />
+                      <img src={brand.image} alt={brand.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                     ) : (
                       <span className="text-4xl font-extrabold text-gray-200">{brand.name.charAt(0)}</span>
                     )}

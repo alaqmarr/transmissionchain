@@ -12,7 +12,7 @@ export default async function Footer() {
     : ["House No 5-1-446, 1st Floor", "Near Lorry Adda, Ranigunj", "Secunderabad City-500003, Hyderabad"];
 
   return (
-    <footer className="bg-brand-black text-brand-white pt-24 pb-12 mt-24 border-t-4 border-t-brand-green relative overflow-hidden">
+    <footer className="bg-brand-black text-brand-white pt-24 pb-12 border-t-4 border-t-brand-green relative overflow-hidden">
       {/* Decorative gradient orb */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-brand-gradient opacity-10 rounded-full blur-[100px] -translate-y-1/2 pointer-events-none"></div>
       

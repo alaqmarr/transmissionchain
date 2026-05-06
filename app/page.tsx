@@ -101,7 +101,7 @@ export default async function Home() {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center relative">
       {/* JSON-LD Structured Data */}
       <script
         type="application/ld+json"
@@ -132,20 +132,34 @@ export default async function Home() {
       <section className="w-full py-28 bg-brand-white relative overflow-hidden">
         {/* Subtle background blob */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-yellow/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+        
+        {/* Decorative gear */}
+        <svg className="absolute -left-16 top-1/2 -translate-y-1/2 animate-spin-slow opacity-[0.03] pointer-events-none" width="300" height="300" viewBox="0 0 100 100" fill="none">
+          <g transform="translate(50,50)">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <rect key={i} x="-5" y="-48" width="10" height="12" rx="2" fill="#18181b" transform={`rotate(${i * 30})`} />
+            ))}
+            <circle r="36" fill="#18181b" />
+            <circle r="28" fill="white" />
+            <circle r="10" fill="#18181b" />
+            <circle r="5" fill="white" />
+          </g>
+        </svg>
 
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="text-center mb-16">
+            <span className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-brand-green bg-brand-green/10 px-4 py-1.5 rounded-full mb-4">Browse by Category</span>
             <h2 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-tighter text-brand-black">Our Categories</h2>
             <p className="text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed">Explore our comprehensive range of high-quality transmission products tailored for industrial excellence.</p>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8 stagger-children">
             {categories.map((cat) => (
               <Link key={cat.id} href={`/categories/${cat.slug}`} className="group bg-white rounded-2xl shadow-glass hover:shadow-premium border border-white/60 overflow-hidden hover:-translate-y-1 transition-all duration-300">
-                <div className="aspect-[4/3] bg-slate-50 flex items-center justify-center p-6 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/5 group-hover:opacity-0 transition-opacity"></div>
+                <div className="aspect-[4/3] bg-slate-50 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/5 group-hover:opacity-0 transition-opacity z-10"></div>
                   {cat.image ? (
-                    <img src={cat.image} alt={cat.name} className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-700 ease-in-out relative z-10" />
+                    <img src={cat.image} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out" />
                   ) : (
                     <Settings className="w-12 h-12 text-gray-300 group-hover:rotate-180 transition-transform duration-700 relative z-10" />
                   )}
@@ -166,10 +180,24 @@ export default async function Home() {
       </section>
 
       {/* Products Showcase */}
-      <section className="w-full py-28 bg-slate-50 relative">
-        <div className="container mx-auto px-4 lg:px-8">
+      <section className="w-full py-28 bg-slate-50 relative overflow-hidden">
+        {/* Decorative gear */}
+        <svg className="absolute -right-20 bottom-10 animate-spin-slow-reverse opacity-[0.03] pointer-events-none" width="350" height="350" viewBox="0 0 100 100" fill="none">
+          <g transform="translate(50,50)">
+            {Array.from({ length: 10 }).map((_, i) => (
+              <rect key={i} x="-6" y="-48" width="12" height="13" rx="2" fill="#18181b" transform={`rotate(${i * 36})`} />
+            ))}
+            <circle r="35" fill="#18181b" />
+            <circle r="26" fill="white" />
+            <circle r="8" fill="#18181b" />
+            <circle r="4" fill="white" />
+          </g>
+        </svg>
+
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
             <div className="max-w-2xl">
+              <span className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-brand-yellow bg-brand-yellow/10 px-4 py-1.5 rounded-full mb-4">Top Sellers</span>
               <h2 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-tighter text-brand-black">Featured Products</h2>
               <p className="text-lg text-gray-500 leading-relaxed">Discover our top-selling transmission components built for unmatched durability and performance.</p>
             </div>
@@ -178,13 +206,13 @@ export default async function Home() {
             </Link>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 stagger-children">
             {products.map((product) => (
               <div key={product.id} className="bg-white rounded-2xl shadow-glass hover:shadow-premium border border-white overflow-hidden flex flex-col hover:-translate-y-1 transition-all duration-300">
-                <Link href={`/products/${product.slug}`} className="aspect-square bg-slate-50/50 p-8 flex items-center justify-center group relative overflow-hidden">
-                  <div className="absolute inset-0 bg-brand-yellow/0 group-hover:bg-brand-yellow/5 transition-colors duration-500"></div>
+                <Link href={`/products/${product.slug}`} className="aspect-[4/3] bg-slate-50/50 relative overflow-hidden group">
+                  <div className="absolute inset-0 bg-brand-yellow/0 group-hover:bg-brand-yellow/5 transition-colors duration-500 z-10"></div>
                   {product.images && product.images.length > 0 ? (
-                    <img src={product.images[0]} alt={product.name} className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-700 ease-out relative z-10 mix-blend-multiply" />
+                    <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
                   ) : (
                     <Settings className="w-16 h-16 text-gray-200 relative z-10" />
                   )}
@@ -210,6 +238,7 @@ export default async function Home() {
                       productId={product.id}
                       productName={product.name}
                       whatsappNumber={whatsappNumber}
+                      compact
                     />
                   </div>
                 </div>
@@ -224,6 +253,58 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      {/* CTA Section with Gear Decoration */}
+      <section className="w-full py-24 bg-brand-black relative overflow-hidden">
+        {/* Decorative gears */}
+        <svg className="absolute -left-16 -top-16 animate-spin-slow opacity-[0.06] pointer-events-none" width="250" height="250" viewBox="0 0 100 100" fill="none">
+          <g transform="translate(50,50)">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <rect key={i} x="-5" y="-48" width="10" height="12" rx="2" fill="white" transform={`rotate(${i * 30})`} />
+            ))}
+            <circle r="36" fill="white" />
+            <circle r="28" fill="transparent" />
+            <circle r="10" fill="white" />
+          </g>
+        </svg>
+        <svg className="absolute -right-10 -bottom-10 animate-spin-slow-reverse opacity-[0.06] pointer-events-none" width="200" height="200" viewBox="0 0 100 100" fill="none">
+          <g transform="translate(50,50)">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <rect key={i} x="-6" y="-48" width="12" height="14" rx="2" fill="white" transform={`rotate(${i * 45})`} />
+            ))}
+            <circle r="34" fill="white" />
+            <circle r="24" fill="transparent" />
+            <circle r="8" fill="white" />
+          </g>
+        </svg>
+
+        {/* Chain decoration */}
+        <div className="absolute top-8 left-0 right-0 overflow-hidden opacity-[0.04] pointer-events-none">
+          <div className="animate-chain-move flex">
+            {Array.from({ length: 60 }).map((_, i) => (
+              <div key={i} className="flex-shrink-0 w-6 h-3 border border-white rounded-sm mx-0.5" />
+            ))}
+          </div>
+        </div>
+
+        <div className="container mx-auto px-4 lg:px-8 text-center relative z-10">
+          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tighter text-white mb-6">
+            Need a <span className="text-brand-gradient">Custom Solution</span>?
+          </h2>
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+            Get in touch with our team for custom transmission requirements, bulk orders, or technical consultation.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/contact" className="group bg-brand-gradient text-brand-black font-extrabold px-10 py-4 rounded-full hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 shadow-[0_0_30px_rgba(250,204,21,0.3)]">
+              Get a Free Quote <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <Link href="/products" className="bg-white/5 backdrop-blur-md text-white font-bold px-10 py-4 rounded-full hover:bg-white/15 transition-all duration-300 border border-white/10">
+              Browse Products
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
+

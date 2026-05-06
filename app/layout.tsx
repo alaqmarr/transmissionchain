@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { Toaster } from "react-hot-toast";
+import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import HideOnRoutes from "@/components/layout/HideOnRoutes";
 
 const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-sans" });
-
-export const preferredRegion = ['sin1']
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://transmissioncentre.com';
 
@@ -81,6 +80,17 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${plusJakartaSans.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-brand-white text-brand-black">
+        <NextTopLoader
+          color="linear-gradient(90deg, #facc15, #22c55e)"
+          initialPosition={0.08}
+          crawlSpeed={200}
+          height={3}
+          crawl={true}
+          showSpinner={false}
+          easing="ease"
+          speed={200}
+          shadow="0 0 10px #facc15, 0 0 5px #22c55e"
+        />
         <HideOnRoutes routes={hiddenRoutes}>
           <Navbar />
         </HideOnRoutes>

@@ -57,10 +57,10 @@ export default async function CategoriesPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {categories.map(category => (
               <Link href={`/categories/${category.slug}`} key={category.id} className="group bg-white rounded-2xl shadow-glass hover:shadow-premium border border-white overflow-hidden flex flex-col hover:-translate-y-1 transition-all duration-300">
-                <div className="aspect-[4/3] bg-slate-50 flex items-center justify-center relative overflow-hidden p-6">
+                <div className="aspect-[4/3] bg-slate-50 relative overflow-hidden">
                   <div className="absolute inset-0 bg-brand-yellow/0 group-hover:bg-brand-yellow/5 transition-colors duration-500 z-10"></div>
                   {category.image ? (
-                    <img src={category.image} alt={category.name} className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-700 ease-out relative z-0 mix-blend-multiply" />
+                    <img src={category.image} alt={category.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out z-0" />
                   ) : (
                     <Settings className="w-16 h-16 text-gray-200 relative z-0" />
                   )}

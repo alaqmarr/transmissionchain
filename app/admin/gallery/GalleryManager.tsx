@@ -86,8 +86,8 @@ export default function GalleryManager({ initialImages }: { initialImages: any[]
             <div>
               <label className="block text-sm font-medium mb-1">Image</label>
               {imageUrl ? (
-                <div className="relative w-full h-48 bg-gray-50 rounded border flex items-center justify-center overflow-hidden mb-2 p-2">
-                  <img src={imageUrl} alt="Uploaded" className="max-h-full max-w-full object-contain" />
+                <div className="relative w-full h-48 bg-gray-50 rounded border flex items-center justify-center overflow-hidden mb-2">
+                  <img src={imageUrl} alt="Uploaded" className="w-full h-full object-cover" />
                   <button type="button" onClick={() => setImageUrl("")} className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1"><Trash2 className="w-4 h-4"/></button>
                 </div>
               ) : (
@@ -119,8 +119,8 @@ export default function GalleryManager({ initialImages }: { initialImages: any[]
           ) : (
             initialImages.map((img) => (
               <div key={img.id} className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden group relative">
-                <div className="aspect-square bg-gray-50 flex items-center justify-center p-2">
-                  <img src={img.imageUrl} alt={img.caption || "Gallery image"} className="max-w-full max-h-full object-contain" />
+                <div className="aspect-square bg-gray-50 flex items-center justify-center overflow-hidden">
+                  <img src={img.imageUrl} alt={img.caption || "Gallery image"} className="w-full h-full object-cover" />
                 </div>
                 {img.caption && (
                   <div className="p-3 text-sm text-center border-t border-gray-50 text-gray-700 truncate">

@@ -70,8 +70,8 @@ export default async function BrandDetailPage({ params }: Props) {
         <div className="mb-16 bg-white p-10 lg:p-14 rounded-3xl shadow-glass border border-gray-100 flex flex-col md:flex-row items-start md:items-center gap-10">
           <div className="flex-shrink-0">
             {brand.image ? (
-              <div className="w-32 h-32 md:w-48 md:h-48 bg-slate-50 rounded-2xl flex items-center justify-center p-6 border border-white shadow-sm">
-                <img src={brand.image} alt={brand.name} className="max-w-full max-h-full object-contain mix-blend-multiply" />
+              <div className="w-32 h-32 md:w-48 md:h-48 bg-slate-50 rounded-2xl flex items-center justify-center border border-white shadow-sm overflow-hidden">
+                <img src={brand.image} alt={brand.name} className="w-full h-full object-cover mix-blend-multiply" />
               </div>
             ) : (
               <div className="w-32 h-32 md:w-48 md:h-48 bg-slate-50 rounded-2xl flex items-center justify-center p-6 border border-white shadow-sm">
@@ -105,10 +105,10 @@ export default async function BrandDetailPage({ params }: Props) {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
               {brand.products.map(product => (
                 <div key={product.id} className="bg-white rounded-2xl shadow-glass hover:shadow-premium border border-white overflow-hidden flex flex-col hover:-translate-y-1 transition-all duration-300">
-                  <Link href={`/products/${product.slug}`} className="aspect-square bg-slate-50/50 p-8 flex items-center justify-center group relative overflow-hidden">
-                    <div className="absolute inset-0 bg-brand-yellow/0 group-hover:bg-brand-yellow/5 transition-colors duration-500"></div>
+                  <Link href={`/products/${product.slug}`} className="aspect-[4/3] bg-slate-50/50 relative overflow-hidden group">
+                    <div className="absolute inset-0 bg-brand-yellow/0 group-hover:bg-brand-yellow/5 transition-colors duration-500 z-10"></div>
                     {product.images && product.images.length > 0 ? (
-                      <img src={product.images[0]} alt={product.name} className="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-700 ease-out relative z-10 mix-blend-multiply" />
+                      <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
                     ) : (
                       <Settings className="w-16 h-16 text-gray-200 relative z-10" />
                     )}
