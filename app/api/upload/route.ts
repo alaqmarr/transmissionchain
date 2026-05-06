@@ -32,10 +32,8 @@ export async function POST(req: Request) {
 
     await r2Client.send(command);
 
-    // Assuming a custom domain is set up for the R2 bucket, or a public URL structure
-    // e.g. https://pub-xxxxxxxxxxxxxxxxxxxxxxxx.r2.dev
-    const publicDomain = process.env.R2_PUBLIC_DOMAIN || `https://pub-your-r2-domain.r2.dev`;
-    const publicUrl = `${publicDomain}/${uniqueFileName}`;
+    // Use the R2 public URL from env
+    const publicUrl = `${process.env.R2_PUBLIC_URL}/${uniqueFileName}`;
 
     return NextResponse.json({ success: true, url: publicUrl });
   } catch (error) {

@@ -101,7 +101,7 @@ export default function EnquiryList({ enquiries: initialEnquiries }: { enquiries
                     </p>
                   </div>
                 </div>
-                <div className="text-xs text-gray-400 flex items-center gap-1 bg-gray-100 px-3 py-1 rounded-full font-medium">
+                <div className="text-xs text-gray-400 flex items-center gap-1 bg-gray-100 px-3 py-1 rounded-full font-medium" suppressHydrationWarning>
                   <Clock className="w-3 h-3" />
                   {new Date(enq.createdAt).toLocaleString()}
                 </div>
