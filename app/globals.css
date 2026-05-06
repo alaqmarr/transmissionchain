@@ -1,26 +1,63 @@
 @import "tailwindcss";
 
+@theme {
+  --color-brand-yellow: #facc15; /* Yellow-400 */
+  --color-brand-green: #22c55e; /* Green-500 */
+  --color-brand-black: #18181b; /* Zinc-900 for a softer premium black */
+  --color-brand-white: #fafafa; /* Zinc-50 for a softer white */
+  
+  --font-sans: var(--font-sans), "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  
+  --shadow-premium: 0 10px 40px -10px rgba(0,0,0,0.08);
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+  --shadow-accent: 0 10px 30px -10px rgba(250, 204, 21, 0.4);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fafafa;
+  --foreground: #18181b;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Force light theme by ignoring dark mode queries */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Base utility classes for nice gear loading animations if needed later */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-33.33%); }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+  width: max-content;
+}
+
+/* Custom Accents */
+.bg-brand-gradient {
+  background: linear-gradient(135deg, var(--color-brand-yellow), var(--color-brand-green));
+}
+.text-brand-gradient {
+  background: linear-gradient(135deg, var(--color-brand-yellow), var(--color-brand-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
