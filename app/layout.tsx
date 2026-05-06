@@ -8,6 +8,8 @@ import HideOnRoutes from "@/components/layout/HideOnRoutes";
 
 const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-sans" });
 
+export const preferredRegion = ['sin1']
+
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://transmissioncentre.com';
 
 export const metadata: Metadata = {

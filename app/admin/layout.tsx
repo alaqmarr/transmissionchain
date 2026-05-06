@@ -5,6 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { Settings, LayoutDashboard, Package, Tags, Bookmark, LogOut, Mail, Image as ImageIcon } from "lucide-react";
 
+export const preferredRegion = ['sin1']
+
 export default async function AdminLayout({
   children,
 }: {
