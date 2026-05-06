@@ -1,14 +1,14 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import Link from "next/link";
 
-export default function AdminLogin() {
+function LoginForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -44,6 +44,28 @@ export default function AdminLogin() {
   };
 
   return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div>
+        <label className="block text-sm font-bold text-gray-300 mb-2 tracking-wide uppercase text-xs">Email Address</label>
+        <input type="email" name="email" required className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:ring-2 focus:ring-brand-yellow focus:border-transparent focus:bg-black/40 transition-all outline-none" placeholder="admin@example.com" />
+      </div>
+      <div>
+        <label className="block text-sm font-bold text-gray-300 mb-2 tracking-wide uppercase text-xs">Password</label>
+        <input type="password" name="password" required className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:ring-2 focus:ring-brand-yellow focus:border-transparent focus:bg-black/40 transition-all outline-none" placeholder="••••••••" />
+      </div>
+      <button 
+        type="submit" 
+        disabled={isSubmitting}
+        className="w-full bg-brand-yellow text-brand-black font-extrabold py-4 rounded-xl hover:bg-white transition-all duration-300 flex justify-center items-center mt-8 shadow-[0_0_20px_rgba(250,204,21,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]"
+      >
+        {isSubmitting ? <Loader2 className="w-6 h-6 animate-spin" /> : "Sign In"}
+      </button>
+    </form>
+  );
+}
+
+export default function AdminLogin() {
+  return (
     <div className="min-h-screen bg-brand-black flex items-center justify-center p-4 relative overflow-hidden">
       {/* Decorative background elements */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-yellow/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
@@ -58,23 +80,13 @@ export default function AdminLogin() {
           <p className="text-gray-400 text-sm mt-3 text-center tracking-wide">Secure access to Transmission Centre</p>
         </div>
         
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label className="block text-sm font-bold text-gray-300 mb-2 tracking-wide uppercase text-xs">Email Address</label>
-            <input type="email" name="email" required className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:ring-2 focus:ring-brand-yellow focus:border-transparent focus:bg-black/40 transition-all outline-none" placeholder="admin@example.com" />
+        <Suspense fallback={
+          <div className="flex justify-center py-8">
+            <Loader2 className="w-6 h-6 animate-spin text-brand-yellow" />
           </div>
-          <div>
-            <label className="block text-sm font-bold text-gray-300 mb-2 tracking-wide uppercase text-xs">Password</label>
-            <input type="password" name="password" required className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:ring-2 focus:ring-brand-yellow focus:border-transparent focus:bg-black/40 transition-all outline-none" placeholder="••••••••" />
-          </div>
-          <button 
-            type="submit" 
-            disabled={isSubmitting}
-            className="w-full bg-brand-yellow text-brand-black font-extrabold py-4 rounded-xl hover:bg-white transition-all duration-300 flex justify-center items-center mt-8 shadow-[0_0_20px_rgba(250,204,21,0.2)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]"
-          >
-            {isSubmitting ? <Loader2 className="w-6 h-6 animate-spin" /> : "Sign In"}
-          </button>
-        </form>
+        }>
+          <LoginForm />
+        </Suspense>
         
         <div className="mt-10 text-center">
           <Link href="/" className="text-sm font-medium text-gray-400 hover:text-brand-yellow transition-colors inline-flex items-center gap-2">
