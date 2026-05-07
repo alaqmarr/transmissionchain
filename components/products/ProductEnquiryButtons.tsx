@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { Mail, X, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -22,6 +23,11 @@ interface Props {
 export default function ProductEnquiryButtons({ productId, productName, whatsappNumber, compact = false }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleWhatsApp = () => {
     const formattedNumber = whatsappNumber.replace(/[^0-9]/g, "");
@@ -56,6 +62,56 @@ export default function ProductEnquiryButtons({ productId, productName, whatsapp
     }
   };
 
+  const modalContent = isModalOpen && mounted ? (
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl w-full max-w-md overflow-hidden shadow-2xl animate-scale-in">
+        <div className="bg-brand-black p-4 flex justify-between items-center text-white">
+          <h3 className="font-bold text-lg">Email Enquiry</h3>
+          <button onClick={() => setIsModalOpen(false)} className="text-gray-300 hover:text-white transition-colors">
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+        <form onSubmit={handleEmailSubmit} className="p-6 space-y-4">
+          <div>
+            <p className="text-sm text-gray-500 mb-4">Inquiring about: <strong className="text-brand-black">{productName}</strong></p>
+          </div>
+          
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+            <input type="text" id="name" name="name" required className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-yellow focus:border-transparent" />
+          </div>
+          
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Your Email</label>
+            <input type="email" id="email" name="email" required className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-yellow focus:border-transparent" />
+          </div>
+          
+          <div>
+            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number (Optional)</label>
+            <input type="tel" id="phone" name="phone" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-yellow focus:border-transparent" />
+          </div>
+          
+          <div>
+            <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
+            <textarea id="message" name="message" rows={4} required placeholder="I would like to know the price and availability..." className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-yellow focus:border-transparent"></textarea>
+          </div>
+          
+          <button 
+            type="submit" 
+            disabled={isSubmitting}
+            className="w-full bg-brand-yellow text-brand-black font-bold py-3 rounded-md hover:bg-yellow-400 transition-colors disabled:opacity-70 flex justify-center items-center gap-2"
+          >
+            {isSubmitting ? (
+              <><Loader2 className="w-5 h-5 animate-spin" /> Sending...</>
+            ) : (
+              "Send Enquiry"
+            )}
+          </button>
+        </form>
+      </div>
+    </div>
+  ) : null;
+
   return (
     <>
       <div className={`flex gap-3 ${compact ? '' : 'flex-col sm:flex-row mt-8'}`}>
@@ -75,55 +131,7 @@ export default function ProductEnquiryButtons({ productId, productName, whatsapp
         </button>
       </div>
 
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl w-full max-w-md overflow-hidden shadow-2xl animate-scale-in">
-            <div className="bg-brand-black p-4 flex justify-between items-center text-white">
-              <h3 className="font-bold text-lg">Email Enquiry</h3>
-              <button onClick={() => setIsModalOpen(false)} className="text-gray-300 hover:text-white transition-colors">
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-            <form onSubmit={handleEmailSubmit} className="p-6 space-y-4">
-              <div>
-                <p className="text-sm text-gray-500 mb-4">Inquiring about: <strong className="text-brand-black">{productName}</strong></p>
-              </div>
-              
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
-                <input type="text" id="name" name="name" required className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-yellow focus:border-transparent" />
-              </div>
-              
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Your Email</label>
-                <input type="email" id="email" name="email" required className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-yellow focus:border-transparent" />
-              </div>
-              
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number (Optional)</label>
-                <input type="tel" id="phone" name="phone" className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-yellow focus:border-transparent" />
-              </div>
-              
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                <textarea id="message" name="message" rows={4} required placeholder="I would like to know the price and availability..." className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-yellow focus:border-transparent"></textarea>
-              </div>
-              
-              <button 
-                type="submit" 
-                disabled={isSubmitting}
-                className="w-full bg-brand-yellow text-brand-black font-bold py-3 rounded-md hover:bg-yellow-400 transition-colors disabled:opacity-70 flex justify-center items-center gap-2"
-              >
-                {isSubmitting ? (
-                  <><Loader2 className="w-5 h-5 animate-spin" /> Sending...</>
-                ) : (
-                  "Send Enquiry"
-                )}
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
+      {modalContent && createPortal(modalContent, document.body)}
     </>
   );
 }

@@ -28,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const [categories, brands, products, settings] = await Promise.all([
+  const [categories, brands, products, settingsRecords] = await Promise.all([
     prisma.category.findMany({ take: 8, orderBy: { name: 'asc' } }),
     prisma.brand.findMany({ orderBy: { name: 'asc' } }),
     prisma.product.findMany({ 
@@ -36,10 +36,24 @@ export default async function Home() {
       orderBy: { createdAt: 'desc' },
       include: { category: true, brand: true }
     }),
-    prisma.setting.findUnique({ where: { key: "phoneNumber" } })
+    prisma.setting.findMany({
+      where: { key: { in: ["whatsappNumber", "heroImages", "phoneNumber"] } }
+    })
   ]);
 
-  const whatsappNumber = settings?.value || "";
+  const settingsMap = settingsRecords.reduce((acc, curr) => {
+    acc[curr.key] = curr.value;
+    return acc;
+  }, {} as Record<string, string>);
+
+  const whatsappNumber = settingsMap.whatsappNumber || settingsMap.phoneNumber || "";
+  
+  let heroImages: string[] = [];
+  try {
+    if (settingsMap.heroImages) heroImages = JSON.parse(settingsMap.heroImages);
+  } catch (e) {
+    console.error("Failed to parse heroImages", e);
+  }
 
   // JSON-LD Structured Data
   const jsonLd = {
@@ -108,7 +122,7 @@ export default async function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       {/* Hero Section */}
-      <HeroCarousel />
+      <HeroCarousel heroImages={heroImages} />
 
       {/* Trust Badges */}
       <section className="w-full py-8 border-b border-gray-100 bg-white relative z-10 -mt-2">

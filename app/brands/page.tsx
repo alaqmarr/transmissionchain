@@ -57,17 +57,19 @@ export default async function BrandsPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
             {brands.map(brand => (
               <Link href={`/brands/${brand.slug}`} key={brand.id} className="group">
-                <div className="bg-white rounded-3xl shadow-glass hover:shadow-premium border border-white overflow-hidden p-8 flex flex-col items-center text-center hover:-translate-y-2 transition-all duration-300 relative h-full">
+                <div className="bg-white rounded-3xl shadow-glass hover:shadow-premium border border-white overflow-hidden flex flex-col items-center text-center hover:-translate-y-2 transition-all duration-300 relative h-full">
                   <div className="absolute inset-0 bg-brand-yellow/0 group-hover:bg-brand-yellow/5 transition-colors duration-500 z-0"></div>
-                  <div className="w-full h-40 mb-6 flex items-center justify-center bg-slate-50 relative z-10 overflow-hidden rounded-t-3xl -mx-8 -mt-8 border-b border-gray-50">
+                  <div className="w-full h-40 flex items-center justify-center bg-slate-50 relative z-10 overflow-hidden border-b border-gray-50">
                     {brand.image ? (
                       <img src={brand.image} alt={brand.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                     ) : (
                       <span className="text-4xl font-extrabold text-gray-200">{brand.name.charAt(0)}</span>
                     )}
                   </div>
-                  <h2 className="text-xl font-bold text-brand-black group-hover:text-brand-green transition-colors tracking-tight relative z-10">{brand.name}</h2>
-                  <p className="text-xs font-bold text-gray-400 mt-3 tracking-widest uppercase relative z-10">{brand._count.products} Products</p>
+                  <div className="p-8 flex flex-col items-center relative z-10 w-full flex-grow">
+                    <h2 className="text-xl font-bold text-brand-black group-hover:text-brand-green transition-colors tracking-tight">{brand.name}</h2>
+                    <p className="text-xs font-bold text-gray-400 mt-3 tracking-widest uppercase">{brand._count.products} Products</p>
+                  </div>
                 </div>
               </Link>
             ))}

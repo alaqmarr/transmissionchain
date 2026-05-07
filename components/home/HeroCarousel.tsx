@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-const HERO_SLIDES = [
+const STATIC_HERO_SLIDES = [
   {
     image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2000",
     title: "Powering Industry with Quality Transmission",
@@ -74,24 +74,33 @@ function HeroGearDecoration() {
   );
 }
 
-export default function HeroCarousel() {
+export default function HeroCarousel({ heroImages = [] }: { heroImages?: string[] }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+
+  // Merge static slides with dynamic images
+  const slides = heroImages.length > 0 
+    ? heroImages.map((img, i) => ({
+        image: img,
+        title: STATIC_HERO_SLIDES[i]?.title || "Powering Industry with Quality Transmission",
+        subtitle: STATIC_HERO_SLIDES[i]?.subtitle || "Premium transmission components built for unmatched durability and performance."
+      }))
+    : STATIC_HERO_SLIDES;
 
   useEffect(() => {
     const timer = setInterval(() => {
       setIsTransitioning(true);
       setTimeout(() => {
-        setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+        setCurrentSlide((prev) => (prev + 1) % slides.length);
         setIsTransitioning(false);
       }, 300);
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [slides.length]);
 
   return (
     <div className="relative w-full h-[700px] md:h-[850px] overflow-hidden bg-brand-black">
-      {HERO_SLIDES.map((slide, index) => (
+      {slides.map((slide, index) => (
         <div 
           key={index}
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
@@ -118,7 +127,7 @@ export default function HeroCarousel() {
       <div className="relative z-10 container mx-auto px-4 lg:px-8 h-full flex flex-col justify-center">
         <div className={`max-w-4xl transition-all duration-500 ${isTransitioning ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"}`}>
           <h1 className="text-5xl md:text-7xl font-extrabold mb-8 leading-[1.1] tracking-tighter text-white">
-            {HERO_SLIDES[currentSlide].title.split("Quality Transmission").map((part, i, arr) => (
+            {slides[currentSlide]?.title?.split("Quality Transmission").map((part, i, arr) => (
               <span key={i}>
                 {part}
                 {i !== arr.length - 1 && <span className="bg-gradient-to-r from-brand-yellow to-yellow-200 bg-clip-text text-transparent">Quality Transmission</span>}
@@ -126,7 +135,7 @@ export default function HeroCarousel() {
             ))}
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-2xl font-medium leading-relaxed tracking-wide">
-            {HERO_SLIDES[currentSlide].subtitle}
+            {slides[currentSlide]?.subtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-5">
             <Link href="/products" className="group bg-brand-gradient text-brand-black font-extrabold px-8 py-4 rounded-full hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 shadow-[0_0_30px_rgba(250,204,21,0.3)] hover:shadow-[0_0_40px_rgba(34,197,94,0.4)]">
@@ -141,7 +150,7 @@ export default function HeroCarousel() {
       
       {/* Indicators */}
       <div className="absolute bottom-10 left-0 right-0 flex justify-center gap-3 z-20">
-        {HERO_SLIDES.map((_, idx) => (
+        {slides.map((_, idx) => (
           <button 
             key={idx}
             onClick={() => setCurrentSlide(idx)}
