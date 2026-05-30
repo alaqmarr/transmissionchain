@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="py-24 relative overflow-hidden bg-white">
+    <div className="py-24 relative overflow-hidden bg-transparent">
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-yellow/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
       
       <div className="container mx-auto px-4 lg:px-8 max-w-5xl relative z-10">
@@ -33,28 +33,28 @@ export default function AboutPage() {
           </p>
         </div>
         
-        <div className="bg-white rounded-3xl shadow-glass border border-gray-100 p-8 md:p-12">
+        <div className="bg-gradient-to-br from-brand-green/10 to-brand-green/20 rounded-3xl shadow-glass border border-brand-green/30 p-8 md:p-12">
           <div className="prose prose-lg max-w-none text-gray-600">
             <p className="text-xl leading-relaxed text-gray-700 mb-12">
               Transmission Centre in Secunderabad City, Hyderabad is known to satisfactorily cater to the demands of its customer base. We specialize in high-quality transmission components and strive to make for a positive experience through all our offerings.
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
-              <div className="bg-slate-50 rounded-2xl p-8 border border-gray-100">
+              <div className="bg-gradient-to-br from-brand-yellow/5 to-brand-yellow/20 rounded-2xl p-8 border border-brand-yellow/20">
                 <h2 className="text-2xl font-bold mb-6 text-brand-black tracking-tight">Our Credentials</h2>
                 <p className="mb-8 text-gray-600">
                   We have earned badges of trust that substantiate the credentials of our business, ensuring you receive only the most reliable service.
                 </p>
                 <div className="flex flex-col gap-4">
-                  <div className="flex items-center gap-4 bg-white px-5 py-4 rounded-xl shadow-sm border border-gray-100">
+                  <div className="flex items-center gap-4 bg-white/50 px-5 py-4 rounded-xl shadow-sm border border-brand-yellow/10">
                     <CheckCircle2 className="text-brand-green w-6 h-6" />
                     <span className="font-bold text-gray-800 tracking-wide">Jd Verified</span>
                   </div>
-                  <div className="flex items-center gap-4 bg-white px-5 py-4 rounded-xl shadow-sm border border-gray-100">
+                  <div className="flex items-center gap-4 bg-white/50 px-5 py-4 rounded-xl shadow-sm border border-brand-yellow/10">
                     <CheckCircle2 className="text-brand-green w-6 h-6" />
                     <span className="font-bold text-gray-800 tracking-wide">Jd Pay Accepted</span>
                   </div>
-                  <div className="flex items-center gap-4 bg-white px-5 py-4 rounded-xl shadow-sm border border-gray-100">
+                  <div className="flex items-center gap-4 bg-white/50 px-5 py-4 rounded-xl shadow-sm border border-brand-yellow/10">
                     <CheckCircle2 className="text-brand-green w-6 h-6" />
                     <span className="font-bold text-gray-800 tracking-wide">Established Since 2016</span>
                   </div>

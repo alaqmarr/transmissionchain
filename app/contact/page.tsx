@@ -43,7 +43,7 @@ export default async function ContactPage() {
     : ["Monday - Saturday: 10:00 AM - 7:00 PM", "Sunday: Closed"];
 
   return (
-    <div className="py-24 relative overflow-hidden bg-slate-50 min-h-[80vh]">
+    <div className="py-24 relative overflow-hidden bg-transparent min-h-[80vh]">
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-yellow/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
 
       <div className="container mx-auto px-4 lg:px-8 max-w-7xl relative z-10">
@@ -57,7 +57,7 @@ export default async function ContactPage() {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
           {/* Contact Information */}
           <div className="lg:col-span-2 space-y-8">
-            <div className="bg-white p-10 rounded-3xl shadow-glass hover:shadow-premium border border-gray-100 transition-all duration-300">
+            <div className="bg-gradient-to-br from-white to-brand-green/10 p-10 rounded-3xl shadow-glass hover:shadow-premium border border-brand-green/20 transition-all duration-300">
               <h2 className="text-2xl font-bold mb-8 text-brand-black tracking-tight">Get in Touch</h2>
 
               <div className="space-y-8">
@@ -120,7 +120,7 @@ export default async function ContactPage() {
 
           {/* Map & Form */}
           <div className="lg:col-span-3 space-y-8">
-            <div className="bg-white p-2 rounded-3xl shadow-glass border border-gray-100 overflow-hidden h-[400px] relative">
+            <div className="bg-gradient-to-br from-brand-yellow/5 to-white p-2 rounded-3xl shadow-glass border border-brand-yellow/10 overflow-hidden h-[400px] relative">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.7441834241693!2d78.486671!3d17.433659!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9a3caea4ba0b%3A0x6b446dc96bb4d5b2!2sRanigunj%2C%20Secunderabad%2C%20Telangana%20500003!5e0!3m2!1sen!2sin!4v1650000000000!5m2!1sen!2sin"
                 className="absolute inset-0 w-full h-full border-0 rounded-2xl"
@@ -130,7 +130,7 @@ export default async function ContactPage() {
               ></iframe>
             </div>
 
-            <div className="bg-white p-8 md:p-10 rounded-3xl shadow-glass border border-gray-100">
+            <div className="bg-gradient-to-br from-white to-brand-green/10 p-8 md:p-10 rounded-3xl shadow-glass border border-brand-green/20">
               <h3 className="text-2xl font-bold mb-8 text-brand-black tracking-tight">Send us a Message</h3>
               <ContactForm />
             </div>

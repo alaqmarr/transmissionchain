@@ -37,7 +37,7 @@ export default async function BrandsPage() {
   });
 
   return (
-    <div className="py-24 relative overflow-hidden bg-slate-50 min-h-[80vh]">
+    <div className="py-24 relative overflow-hidden bg-transparent min-h-[80vh]">
       <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-brand-yellow/5 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/3 pointer-events-none"></div>
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10 max-w-7xl">
@@ -57,7 +57,7 @@ export default async function BrandsPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
             {brands.map(brand => (
               <Link href={`/brands/${brand.slug}`} key={brand.id} className="group">
-                <div className="bg-white rounded-3xl shadow-glass hover:shadow-premium border border-white overflow-hidden flex flex-col items-center text-center hover:-translate-y-2 transition-all duration-300 relative h-full">
+                <div className="bg-gradient-to-br from-brand-yellow/5 to-brand-yellow/20 rounded-3xl shadow-glass hover:shadow-premium border border-brand-yellow/20 overflow-hidden flex flex-col items-center text-center hover:-translate-y-2 transition-all duration-300 relative h-full">
                   <div className="absolute inset-0 bg-brand-yellow/0 group-hover:bg-brand-yellow/5 transition-colors duration-500 z-0"></div>
                   <div className="w-full h-40 flex items-center justify-center bg-slate-50 relative z-10 overflow-hidden border-b border-gray-50">
                     {brand.image ? (

@@ -25,7 +25,7 @@ export default async function GalleryPage() {
   });
 
   return (
-    <div className="py-24 relative overflow-hidden bg-slate-50 min-h-[80vh]">
+    <div className="py-24 relative overflow-hidden bg-transparent min-h-[80vh]">
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-yellow/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
       
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
@@ -44,7 +44,7 @@ export default async function GalleryPage() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
             {images.map((img) => (
-              <div key={img.id} className="group relative rounded-2xl overflow-hidden shadow-glass hover:shadow-premium border border-white bg-white aspect-square flex flex-col hover:-translate-y-1 transition-all duration-300">
+              <div key={img.id} className="group relative rounded-2xl overflow-hidden shadow-glass hover:shadow-premium border border-brand-green/20 bg-gradient-to-br from-brand-green/5 to-brand-green/20 aspect-square flex flex-col hover:-translate-y-1 transition-all duration-300">
                 <div className="flex-1 flex items-center justify-center bg-slate-50 relative overflow-hidden">
                   <div className="absolute inset-0 bg-brand-yellow/0 group-hover:bg-brand-yellow/5 transition-colors duration-500"></div>
                   <img 
@@ -54,8 +54,8 @@ export default async function GalleryPage() {
                   />
                 </div>
                 {img.caption && (
-                  <div className="p-4 bg-white relative z-20">
-                    <p className="text-sm font-semibold text-center text-gray-800 tracking-wide truncate">
+                  <div className="p-4 relative z-20">
+                    <p className="text-sm font-semibold text-center text-brand-black tracking-wide truncate">
                       {img.caption}
                     </p>
                   </div>

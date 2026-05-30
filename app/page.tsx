@@ -143,7 +143,7 @@ export default async function Home() {
       {brands.length > 0 && <BrandSlider brands={brands} />}
 
       {/* Categories Showcase */}
-      <section className="w-full py-28 bg-brand-white relative overflow-hidden">
+      <section className="w-full py-28 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-green/20 via-brand-green/5 to-transparent relative overflow-hidden">
         {/* Subtle background blob */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-yellow/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
         
@@ -169,7 +169,7 @@ export default async function Home() {
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8 stagger-children">
             {categories.map((cat) => (
-              <Link key={cat.id} href={`/categories/${cat.slug}`} className="group bg-white rounded-2xl shadow-glass hover:shadow-premium border border-white/60 overflow-hidden hover:-translate-y-1 transition-all duration-300">
+              <Link key={cat.id} href={`/categories/${cat.slug}`} className="group bg-gradient-to-br from-brand-green/5 to-brand-green/20 rounded-2xl shadow-glass hover:shadow-premium border border-brand-green/20 overflow-hidden hover:-translate-y-1 transition-all duration-300">
                 <div className="aspect-[4/3] bg-slate-50 relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/5 group-hover:opacity-0 transition-opacity z-10"></div>
                   {cat.image ? (
@@ -178,7 +178,7 @@ export default async function Home() {
                     <Settings className="w-12 h-12 text-gray-300 group-hover:rotate-180 transition-transform duration-700 relative z-10" />
                   )}
                 </div>
-                <div className="p-5 text-center bg-white relative z-20">
+                <div className="p-5 text-center relative z-20">
                   <h3 className="font-bold text-gray-800 group-hover:text-brand-green transition-colors tracking-wide">{cat.name}</h3>
                 </div>
               </Link>
@@ -194,7 +194,7 @@ export default async function Home() {
       </section>
 
       {/* Products Showcase */}
-      <section className="w-full py-28 bg-slate-50 relative overflow-hidden">
+      <section className="w-full py-28 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-brand-yellow/20 via-brand-yellow/5 to-brand-green/10 relative overflow-hidden">
         {/* Decorative gear */}
         <svg className="absolute -right-20 bottom-10 animate-spin-slow-reverse opacity-[0.03] pointer-events-none" width="350" height="350" viewBox="0 0 100 100" fill="none">
           <g transform="translate(50,50)">
@@ -222,7 +222,7 @@ export default async function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 stagger-children">
             {products.map((product) => (
-              <div key={product.id} className="bg-white rounded-2xl shadow-glass hover:shadow-premium border border-white overflow-hidden flex flex-col hover:-translate-y-1 transition-all duration-300">
+              <div key={product.id} className="bg-gradient-to-br from-brand-yellow/5 to-brand-yellow/20 rounded-2xl shadow-glass hover:shadow-premium border border-brand-yellow/20 overflow-hidden flex flex-col hover:-translate-y-1 transition-all duration-300">
                 <Link href={`/products/${product.slug}`} className="aspect-[4/3] bg-slate-50/50 relative overflow-hidden group">
                   <div className="absolute inset-0 bg-brand-yellow/0 group-hover:bg-brand-yellow/5 transition-colors duration-500 z-10"></div>
                   {product.images && product.images.length > 0 ? (
@@ -231,7 +231,7 @@ export default async function Home() {
                     <Settings className="w-16 h-16 text-gray-200 relative z-10" />
                   )}
                 </Link>
-                <div className="p-6 flex flex-col flex-1 bg-white relative z-20">
+                <div className="p-6 flex flex-col flex-1 relative z-20">
                   <div className="flex justify-between items-center mb-3">
                     <span className="text-xs font-bold text-brand-green tracking-widest uppercase">
                       {product.category?.name || "Category"}

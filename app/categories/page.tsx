@@ -37,7 +37,7 @@ export default async function CategoriesPage() {
   });
 
   return (
-    <div className="py-24 relative overflow-hidden bg-slate-50 min-h-[80vh]">
+    <div className="py-24 relative overflow-hidden bg-transparent min-h-[80vh]">
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-yellow/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10 max-w-7xl">
@@ -56,7 +56,7 @@ export default async function CategoriesPage() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {categories.map(category => (
-              <Link href={`/categories/${category.slug}`} key={category.id} className="group bg-white rounded-2xl shadow-glass hover:shadow-premium border border-white overflow-hidden flex flex-col hover:-translate-y-1 transition-all duration-300">
+              <Link href={`/categories/${category.slug}`} key={category.id} className="group bg-gradient-to-br from-brand-green/5 to-brand-green/20 rounded-2xl shadow-glass hover:shadow-premium border border-brand-green/20 overflow-hidden flex flex-col hover:-translate-y-1 transition-all duration-300">
                 <div className="aspect-[4/3] bg-slate-50 relative overflow-hidden">
                   <div className="absolute inset-0 bg-brand-yellow/0 group-hover:bg-brand-yellow/5 transition-colors duration-500 z-10"></div>
                   {category.image ? (
@@ -65,7 +65,7 @@ export default async function CategoriesPage() {
                     <Settings className="w-16 h-16 text-gray-200 relative z-0" />
                   )}
                 </div>
-                <div className="p-8 flex-grow flex flex-col bg-white relative z-20">
+                <div className="p-8 flex-grow flex flex-col relative z-20">
                   <h2 className="text-2xl font-bold mb-3 text-brand-black group-hover:text-brand-green transition-colors tracking-tight">{category.name}</h2>
                   {category.description && (
                     <p className="text-gray-500 text-base mb-6 leading-relaxed line-clamp-2">{category.description}</p>

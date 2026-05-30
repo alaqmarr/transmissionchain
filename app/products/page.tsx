@@ -60,7 +60,7 @@ export default async function ProductsPage() {
   };
 
   return (
-    <div className="py-24 relative overflow-hidden bg-slate-50 min-h-[80vh]">
+    <div className="py-24 relative overflow-hidden bg-transparent min-h-[80vh]">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }} />
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-yellow/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
 
@@ -80,7 +80,7 @@ export default async function ProductsPage() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {products.map(product => (
-              <div key={product.id} className="bg-white rounded-2xl shadow-glass hover:shadow-premium border border-white overflow-hidden flex flex-col hover:-translate-y-1 transition-all duration-300">
+              <div key={product.id} className="bg-gradient-to-br from-brand-yellow/5 to-brand-yellow/20 rounded-2xl shadow-glass hover:shadow-premium border border-brand-yellow/20 overflow-hidden flex flex-col hover:-translate-y-1 transition-all duration-300">
                 <Link href={`/products/${product.slug}`} className="aspect-[4/3] bg-slate-50/50 relative overflow-hidden group">
                   <div className="absolute inset-0 bg-brand-yellow/0 group-hover:bg-brand-yellow/5 transition-colors duration-500 z-10"></div>
                   {product.images && product.images.length > 0 ? (
@@ -89,7 +89,7 @@ export default async function ProductsPage() {
                     <Settings className="w-16 h-16 text-gray-200 relative z-10" />
                   )}
                 </Link>
-                <div className="p-6 flex flex-col flex-1 bg-white relative z-20">
+                <div className="p-6 flex flex-col flex-1 relative z-20">
                   <div className="flex justify-between items-center mb-3">
                     <span className="text-xs font-bold text-brand-green tracking-widest uppercase">
                       {product.category?.name || "Category"}

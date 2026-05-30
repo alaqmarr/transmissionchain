@@ -124,27 +124,27 @@ export default async function ProductDetailPage({ params }: Props) {
   };
 
   return (
-    <div className="py-24 relative bg-slate-50 min-h-screen">
+    <div className="py-24 relative bg-transparent min-h-screen">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
-      <div className="absolute top-0 left-0 w-full h-96 bg-brand-black -z-10"></div>
+      <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-brand-yellow/10 to-transparent -z-10"></div>
       
       <div className="container mx-auto px-4 lg:px-8 max-w-7xl">
         {/* Breadcrumbs */}
-        <nav className="flex text-sm text-gray-400 mb-8 items-center font-medium tracking-wide">
+        <nav className="flex text-sm text-brand-black/60 mb-8 items-center font-medium tracking-wide">
           <Link href="/" className="hover:text-brand-yellow transition-colors">Home</Link>
           <ChevronRight className="w-4 h-4 mx-2" />
           <Link href="/products" className="hover:text-brand-yellow transition-colors">Products</Link>
           <ChevronRight className="w-4 h-4 mx-2" />
           <Link href={`/categories/${product.category.slug}`} className="hover:text-brand-yellow transition-colors">{product.category.name}</Link>
           <ChevronRight className="w-4 h-4 mx-2" />
-          <span className="text-white truncate max-w-[200px]">{product.name}</span>
+          <span className="text-brand-black font-bold truncate max-w-[200px]">{product.name}</span>
         </nav>
 
-        <div className="bg-white rounded-3xl shadow-glass border border-gray-100 overflow-hidden relative">
+        <div className="bg-gradient-to-br from-brand-yellow/10 to-brand-yellow/20 rounded-3xl shadow-glass border border-brand-yellow/30 overflow-hidden relative">
           <div className="grid grid-cols-1 lg:grid-cols-2">
             {/* Images Section */}
-            <div className="bg-slate-50 relative min-h-[400px] lg:min-h-[600px] group overflow-hidden">
+            <div className="bg-brand-yellow/5 relative min-h-[400px] lg:min-h-[600px] group overflow-hidden border-r border-brand-yellow/20">
               <div className="absolute inset-0 bg-brand-yellow/0 group-hover:bg-brand-yellow/5 transition-colors duration-500 z-10"></div>
               {product.images && product.images.length > 0 ? (
                 <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 relative" />

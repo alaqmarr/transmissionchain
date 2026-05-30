@@ -79,7 +79,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${plusJakartaSans.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-brand-white text-brand-black">
+      <body className="min-h-full flex flex-col bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-yellow/10 via-brand-yellow/5 to-brand-green/10 text-brand-black">
         <NextTopLoader
           color="linear-gradient(90deg, #facc15, #22c55e)"
           initialPosition={0.08}
