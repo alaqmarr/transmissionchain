@@ -18,6 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!category) return { title: "Not Found" };
 
   const productKeywords = category.products.map(p => p.name.toLowerCase());
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://transmissioncentre.com';
   
   return {
     title: `${category.name} - Transmission Products`,
@@ -33,12 +34,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: category.description || `Browse ${category.products.length} products in ${category.name} at Transmission Centre.`,
       url: `/categories/${category.slug}`,
       siteName: "Transmission Centre",
-      images: category.image ? [{ url: category.image, alt: category.name }] : [{ url: "/logo.png", alt: "Transmission Centre" }],
+      images: category.image ? [{ 
+        url: category.image.startsWith('http') ? category.image : `${baseUrl}${category.image}`, 
+        width: 800, height: 800, alt: category.name, type: "image/jpeg" 
+      }] : [{ url: `${baseUrl}/logo.png`, width: 512, height: 512, alt: "Transmission Centre", type: "image/png" }],
       type: "website",
+      locale: "en_IN",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${category.name} | Transmission Centre`,
+      description: category.description || `Browse ${category.products.length} products in ${category.name} at Transmission Centre.`,
+      images: category.image ? [category.image.startsWith('http') ? category.image : `${baseUrl}${category.image}`] : [`${baseUrl}/logo.png`],
     },
     alternates: { canonical: `/categories/${category.slug}` },
   };
 }
+
+export const revalidate = 3600;
 
 export async function generateStaticParams() {
   const categories = await prisma.category.findMany({ select: { slug: true } });

@@ -8,6 +8,7 @@ export const revalidate = 3600;
 export async function generateMetadata(): Promise<Metadata> {
   const products = await prisma.product.findMany({ select: { name: true } });
   const productKeywords = products.map(p => p.name.toLowerCase());
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://transmissioncentre.com';
 
   return {
     title: "All Transmission Products - CI Hand Wheels, Disc Pack Couplings & More",
@@ -23,7 +24,15 @@ export async function generateMetadata(): Promise<Metadata> {
       description: `Browse ${products.length}+ premium transmission products at Transmission Centre, Secunderabad.`,
       url: "/products",
       siteName: "Transmission Centre",
+      images: [{ url: `${baseUrl}/logo.png`, width: 512, height: 512, alt: "Transmission Centre Logo", type: "image/png" }],
       type: "website",
+      locale: "en_IN",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Products | Transmission Centre",
+      description: `Browse ${products.length}+ premium transmission products at Transmission Centre, Secunderabad.`,
+      images: [`${baseUrl}/logo.png`],
     },
     alternates: {
       canonical: "/products",

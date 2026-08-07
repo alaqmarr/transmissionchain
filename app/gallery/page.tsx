@@ -14,7 +14,15 @@ export const metadata: Metadata = {
     description: "Browse images of our premium transmission products and industrial components.",
     url: "/gallery",
     siteName: "Transmission Centre",
+    images: [{ url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://transmissioncentre.com'}/logo.png`, width: 512, height: 512, alt: "Transmission Centre Logo", type: "image/png" }],
     type: "website",
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Product Gallery | Transmission Centre",
+    description: "Browse images of our premium transmission products and industrial components.",
+    images: [`${process.env.NEXT_PUBLIC_BASE_URL || 'https://transmissioncentre.com'}/logo.png`],
   },
   alternates: { canonical: "/gallery" },
 };

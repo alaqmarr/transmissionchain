@@ -17,7 +17,15 @@ export const metadata: Metadata = {
     description: "Get in touch for quotes on premium transmission products. Located in Secunderabad.",
     url: "/contact",
     siteName: "Transmission Centre",
+    images: [{ url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://transmissioncentre.com'}/logo.png`, width: 512, height: 512, alt: "Transmission Centre Logo", type: "image/png" }],
     type: "website",
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Transmission Centre",
+    description: "Get in touch for quotes on premium transmission products. Located in Secunderabad.",
+    images: [`${process.env.NEXT_PUBLIC_BASE_URL || 'https://transmissioncentre.com'}/logo.png`],
   },
   alternates: { canonical: "/contact" },
 };

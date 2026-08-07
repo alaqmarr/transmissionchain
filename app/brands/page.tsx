@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 export async function generateMetadata(): Promise<Metadata> {
   const brands = await prisma.brand.findMany({ select: { name: true } });
   const brandKeywords = brands.map(b => b.name.toLowerCase());
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://transmissioncentre.com';
 
   return {
     title: "Our Partner Brands - Trusted Transmission Product Manufacturers",
@@ -19,7 +20,15 @@ export async function generateMetadata(): Promise<Metadata> {
       description: `Browse ${brands.length} trusted transmission product brands at Transmission Centre.`,
       url: "/brands",
       siteName: "Transmission Centre",
+      images: [{ url: `${baseUrl}/logo.png`, width: 512, height: 512, alt: "Transmission Centre Logo", type: "image/png" }],
       type: "website",
+      locale: "en_IN",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Partner Brands | Transmission Centre",
+      description: `Browse ${brands.length} trusted transmission product brands at Transmission Centre.`,
+      images: [`${baseUrl}/logo.png`],
     },
     alternates: { canonical: "/brands" },
   };

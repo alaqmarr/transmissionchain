@@ -11,6 +11,7 @@ export const revalidate = 60; // Revalidate every 60 seconds
 export async function generateMetadata(): Promise<Metadata> {
   const products = await prisma.product.findMany({ select: { name: true } });
   const productKeywords = products.map(p => p.name.toLowerCase());
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://transmissioncentre.com';
 
   return {
     title: "Transmission Centre | Premium CI Hand Wheels, Disc Pack Couplings & Transmission Products in Secunderabad",
@@ -23,6 +24,21 @@ export async function generateMetadata(): Promise<Metadata> {
     ],
     alternates: {
       canonical: "/",
+    },
+    openGraph: {
+      title: "Transmission Centre | Premium Transmission Products",
+      description: "Leading supplier of CI hand wheels, disc pack couplings, nylon gear couplings, rubber spiders, and premium transmission products in Secunderabad.",
+      url: "/",
+      siteName: "Transmission Centre",
+      images: [{ url: `${baseUrl}/logo.png`, width: 512, height: 512, alt: "Transmission Centre Logo", type: "image/png" }],
+      type: "website",
+      locale: "en_IN",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Transmission Centre | Premium Transmission Products",
+      description: "Leading supplier of CI hand wheels, disc pack couplings, nylon gear couplings, and transmission products.",
+      images: [`${baseUrl}/logo.png`],
     },
   };
 }

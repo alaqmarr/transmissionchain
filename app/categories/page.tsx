@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 export async function generateMetadata(): Promise<Metadata> {
   const categories = await prisma.category.findMany({ select: { name: true } });
   const categoryKeywords = categories.map(c => c.name.toLowerCase());
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://transmissioncentre.com';
 
   return {
     title: "Product Categories - CI Hand Wheels, Couplings, Rubber Spiders & More",
@@ -19,7 +20,15 @@ export async function generateMetadata(): Promise<Metadata> {
       description: `Explore ${categories.length} product categories at Transmission Centre, Secunderabad.`,
       url: "/categories",
       siteName: "Transmission Centre",
+      images: [{ url: `${baseUrl}/logo.png`, width: 512, height: 512, alt: "Transmission Centre Logo", type: "image/png" }],
       type: "website",
+      locale: "en_IN",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Product Categories | Transmission Centre",
+      description: `Explore ${categories.length} product categories at Transmission Centre, Secunderabad.`,
+      images: [`${baseUrl}/logo.png`],
     },
     alternates: { canonical: "/categories" },
   };

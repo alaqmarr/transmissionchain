@@ -15,7 +15,15 @@ export const metadata: Metadata = {
     description: "Trusted supplier of transmission products in Secunderabad since 2016. JD Verified.",
     url: "/about",
     siteName: "Transmission Centre",
+    images: [{ url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://transmissioncentre.com'}/logo.png`, width: 512, height: 512, alt: "Transmission Centre Logo", type: "image/png" }],
     type: "website",
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Transmission Centre",
+    description: "Trusted supplier of transmission products in Secunderabad since 2016. JD Verified.",
+    images: [`${process.env.NEXT_PUBLIC_BASE_URL || 'https://transmissioncentre.com'}/logo.png`],
   },
   alternates: { canonical: "/about" },
 };

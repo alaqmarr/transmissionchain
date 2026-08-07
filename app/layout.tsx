@@ -51,18 +51,19 @@ export const metadata: Metadata = {
     description: "Your trusted partner for CI hand wheels, disc pack couplings, nylon gear couplings, rubber spiders and industrial transmission products in Secunderabad, Hyderabad.",
     images: [
       {
-        url: "/logo.png",
+        url: `${baseUrl}/logo.png`,
         width: 512,
         height: 512,
         alt: "Transmission Centre Logo",
+        type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Transmission Centre | Premium Transmission Products",
-    description: "Leading supplier of CI hand wheels, disc pack couplings, nylon gear couplings and transmission products in Secunderabad.",
-    images: ["/logo.png"],
+    title: "Transmission Centre | Premium CI Hand Wheels, Disc Pack Couplings & Transmission Products",
+    description: "Your trusted partner for CI hand wheels, disc pack couplings, nylon gear couplings, rubber spiders and industrial transmission products in Secunderabad, Hyderabad.",
+    images: [`${baseUrl}/logo.png`],
   },
   alternates: {
     canonical: baseUrl,
