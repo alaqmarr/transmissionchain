@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: "Transmission Centre",
       images: brand.image ? [{ 
         url: brand.image.startsWith('http') ? brand.image : new URL(brand.image, baseUrl).toString(), 
-        width: 800, height: 800, alt: brand.name, type: "image/jpeg" 
+        width: 800, height: 800, alt: brand.name
       }] : [{ url: `${baseUrl}/logo.png`, width: 512, height: 512, alt: "Transmission Centre", type: "image/png" }],
       type: "website",
       locale: "en_IN",

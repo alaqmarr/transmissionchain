@@ -41,7 +41,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           width: 800,
           height: 800,
           alt: product.name,
-          type: "image/jpeg",
         }
       ] : [{ url: `${baseUrl}/logo.png`, width: 512, height: 512, alt: "Transmission Centre", type: "image/png" }],
       type: "website",
@@ -94,7 +93,7 @@ export default async function ProductDetailPage({ params }: Props) {
     "@type": "Product",
     "name": product.name,
     "description": product.description,
-    "image": product.images && product.images.length > 0 ? product.images : [`${baseUrl}/logo.png`],
+    "image": product.images && product.images.length > 0 ? product.images.map(img => img.startsWith('http') ? img : new URL(img, baseUrl).toString()) : [`${baseUrl}/logo.png`],
     "brand": {
       "@type": "Brand",
       "name": product.brand.name,
