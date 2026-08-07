@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   
   const getOgImageUrl = (imageUrl: string) => {
     const absoluteUrl = imageUrl.startsWith('http') ? imageUrl : new URL(imageUrl, baseUrl).toString();
-    return `${baseUrl}/api/og-image?url=${encodeURIComponent(absoluteUrl)}`;
+    return `${baseUrl}/_next/image?url=${encodeURIComponent(absoluteUrl)}&w=828&q=75`;
   };
   
   return {

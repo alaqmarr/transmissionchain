@@ -20,10 +20,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://transmissioncentre.com';
   
-  // Helper: proxy R2 images through our API for WhatsApp/social media compatibility
+  // Helper: proxy R2 images through Next.js built-in optimizer for strict WhatsApp size limits (<300KB)
   const getOgImageUrl = (imageUrl: string) => {
     const absoluteUrl = imageUrl.startsWith('http') ? imageUrl : new URL(imageUrl, baseUrl).toString();
-    return `${baseUrl}/api/og-image?url=${encodeURIComponent(absoluteUrl)}`;
+    return `${baseUrl}/_next/image?url=${encodeURIComponent(absoluteUrl)}&w=828&q=75`;
   };
   
   return {
