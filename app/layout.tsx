@@ -9,7 +9,8 @@ import HideOnRoutes from "@/components/layout/HideOnRoutes";
 
 const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-sans" });
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://transmissioncentre.com';
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://transmissioncentre.com');
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
