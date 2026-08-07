@@ -20,6 +20,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://transmissioncentre.com';
   
+  // Helper: proxy R2 images through our API for WhatsApp/social media compatibility
+  const getOgImageUrl = (imageUrl: string) => {
+    const absoluteUrl = imageUrl.startsWith('http') ? imageUrl : new URL(imageUrl, baseUrl).toString();
+    return `${baseUrl}/api/og-image?url=${encodeURIComponent(absoluteUrl)}`;
+  };
+  
   return {
     title: `${product.name} - ${product.category.name} | Transmission Centre`,
     description: `${product.name} by ${product.brand.name}. ${product.description.substring(0, 150)}... Available at Transmission Centre, Secunderabad.`,
@@ -37,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: "Transmission Centre",
       images: product.images && product.images.length > 0 ? [
         {
-          url: product.images[0].startsWith('http') ? product.images[0] : new URL(product.images[0], baseUrl).toString(),
+          url: getOgImageUrl(product.images[0]),
           width: 800,
           height: 800,
           alt: product.name,
@@ -50,7 +56,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: "summary_large_image",
       title: `${product.name} | Transmission Centre`,
       description: `${product.name} - ${product.category.name} by ${product.brand.name}`,
-      images: product.images && product.images.length > 0 ? [product.images[0].startsWith('http') ? product.images[0] : new URL(product.images[0], baseUrl).toString()] : [`${baseUrl}/logo.png`],
+      images: product.images && product.images.length > 0 ? [getOgImageUrl(product.images[0])] : [`${baseUrl}/logo.png`],
     },
     alternates: {
       canonical: `/products/${product.slug}`,
