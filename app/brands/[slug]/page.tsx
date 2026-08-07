@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: `/brands/${brand.slug}`,
       siteName: "Transmission Centre",
       images: brand.image ? [{ 
-        url: brand.image.startsWith('http') ? brand.image : `${baseUrl}${brand.image}`, 
+        url: brand.image.startsWith('http') ? brand.image : new URL(brand.image, baseUrl).toString(), 
         width: 800, height: 800, alt: brand.name, type: "image/jpeg" 
       }] : [{ url: `${baseUrl}/logo.png`, width: 512, height: 512, alt: "Transmission Centre", type: "image/png" }],
       type: "website",
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: "summary_large_image",
       title: `${brand.name} Products | Transmission Centre`,
       description: brand.description || `Browse ${brand.products.length} products from ${brand.name} at Transmission Centre.`,
-      images: brand.image ? [brand.image.startsWith('http') ? brand.image : `${baseUrl}${brand.image}`] : [`${baseUrl}/logo.png`],
+      images: brand.image ? [brand.image.startsWith('http') ? brand.image : new URL(brand.image, baseUrl).toString()] : [`${baseUrl}/logo.png`],
     },
     alternates: { canonical: `/brands/${brand.slug}` },
   };
