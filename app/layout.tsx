@@ -6,6 +6,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import HideOnRoutes from "@/components/layout/HideOnRoutes";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 const plusJakartaSans = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -82,6 +83,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${plusJakartaSans.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand-yellow/10 via-brand-yellow/5 to-brand-green/10 text-brand-black">
+        <GoogleAnalytics />
         <NextTopLoader
           color="linear-gradient(90deg, #facc15, #22c55e)"
           initialPosition={0.08}
