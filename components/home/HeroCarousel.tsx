@@ -2,163 +2,178 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Box } from "lucide-react";
 
-const STATIC_HERO_SLIDES = [
-  {
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=2000",
-    title: "Powering Industry with Quality Transmission",
-    subtitle: "Your trusted partner for CI hand wheels, disc pack couplings, and rubber spiders in Secunderabad."
-  },
-  {
-    image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=2000",
-    title: "Engineered for Excellence",
-    subtitle: "Discover our premium range of nylon gear couplings designed for high performance."
-  },
-  {
-    image: "https://images.unsplash.com/photo-1565439390234-fcac5471d87f?auto=format&fit=crop&q=80&w=2000",
-    title: "Reliability You Can Count On",
-    subtitle: "Serving industrial needs since 2016 with unmatched quality and service."
-  }
-];
-
-function HeroGearDecoration() {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none z-[5]">
-      {/* Large gear bottom-right */}
-      <svg
-        className="absolute -bottom-20 -right-20 animate-spin-slow opacity-[0.06]"
-        width="400"
-        height="400"
-        viewBox="0 0 100 100"
-        fill="none"
-      >
-        <g transform="translate(50,50)">
-          {Array.from({ length: 14 }).map((_, i) => (
-            <rect key={i} x="-4" y="-48" width="8" height="11" rx="2" fill="white" transform={`rotate(${i * (360 / 14)})`} />
-          ))}
-          <circle r="37" fill="white" />
-          <circle r="30" fill="transparent" stroke="white" strokeWidth="1" />
-          <circle r="10" fill="white" />
-          <circle r="5" fill="transparent" />
-        </g>
-      </svg>
-
-      {/* Medium gear top-right */}
-      <svg
-        className="absolute -top-10 right-32 animate-spin-slow-reverse opacity-[0.04]"
-        width="220"
-        height="220"
-        viewBox="0 0 100 100"
-        fill="none"
-      >
-        <g transform="translate(50,50)">
-          {Array.from({ length: 10 }).map((_, i) => (
-            <rect key={i} x="-5" y="-48" width="10" height="13" rx="2" fill="white" transform={`rotate(${i * 36})`} />
-          ))}
-          <circle r="35" fill="white" />
-          <circle r="26" fill="transparent" />
-          <circle r="8" fill="white" />
-        </g>
-      </svg>
-
-      {/* Chain link decoration bottom */}
-      <div className="absolute bottom-24 left-0 right-0 flex justify-center overflow-hidden opacity-[0.05]">
-        <div className="animate-chain-move flex">
-          {Array.from({ length: 50 }).map((_, i) => (
-            <div key={i} className="flex-shrink-0 w-6 h-3 border border-white rounded-sm mx-0.5" />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
+interface Product {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  images?: string[];
+  category?: { name: string; slug: string };
+  brand?: { name: string; slug: string };
 }
 
-export default function HeroCarousel({ heroImages = [] }: { heroImages?: string[] }) {
+export default function HeroCarousel({ products = [] }: { products?: Product[] }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Merge static slides with dynamic images
-  const slides = heroImages.length > 0 
-    ? heroImages.map((img, i) => ({
-        image: img,
-        title: STATIC_HERO_SLIDES[i]?.title || "Powering Industry with Quality Transmission",
-        subtitle: STATIC_HERO_SLIDES[i]?.subtitle || "Premium transmission components built for unmatched durability and performance."
-      }))
-    : STATIC_HERO_SLIDES;
+  // If no products, fallback to a static state
+  const hasProducts = products && products.length > 0;
+  
+  const slides = hasProducts ? products : [
+    {
+      id: "fallback-1",
+      name: "Premium Transmission Products",
+      slug: "",
+      description: "Discover our top-selling transmission components built for unmatched durability and performance.",
+      images: ["/logo.png"],
+      category: { name: "Industrial", slug: "categories" },
+      brand: { name: "TCC", slug: "brands" }
+    }
+  ];
 
   useEffect(() => {
+    if (slides.length <= 1) return;
     const timer = setInterval(() => {
       setIsTransitioning(true);
       setTimeout(() => {
         setCurrentSlide((prev) => (prev + 1) % slides.length);
         setIsTransitioning(false);
-      }, 300);
+      }, 400); // slightly longer for smoother transition
     }, 5000);
     return () => clearInterval(timer);
   }, [slides.length]);
 
+  const currentProduct = slides[currentSlide];
+  const imageUrl = currentProduct?.images?.[0] || "/logo.png";
+
   return (
-    <div className="relative w-full h-[700px] md:h-[850px] overflow-hidden bg-brand-black">
-      {slides.map((slide, index) => (
-        <div 
-          key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-            index === currentSlide ? "opacity-100" : "opacity-0"
-          }`}
+    <div 
+      className="relative w-full min-h-[700px] md:h-[85vh] overflow-hidden bg-cover bg-center pt-20"
+      style={{ backgroundImage: 'url(/1.jpeg)' }}
+    >
+      {/* Subtle yellow gradient overlay for readability and styling */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#05110c] via-[#092218]/80 to-[#ca8a04]/20 pointer-events-none z-0 mix-blend-multiply"></div>
+      <div className="absolute inset-0 bg-black/40 pointer-events-none z-0"></div>
+      {/* Decorative gears */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <svg
+          className="absolute -bottom-20 -left-20 animate-spin-slow opacity-[0.05]"
+          width="400"
+          height="400"
+          viewBox="0 0 100 100"
+          fill="none"
         >
-          {/* Background Image with slight scale animation when active */}
-          <div 
-            className={`absolute inset-0 bg-cover bg-center transition-transform duration-[10000ms] ease-linear ${
-              index === currentSlide ? "scale-105" : "scale-100"
-            }`}
-            style={{ backgroundImage: `url(${slide.image})` }}
-          />
-          {/* Advanced Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-black/90 via-brand-black/60 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-black/80 via-transparent to-brand-black/30" />
-        </div>
-      ))}
-
-      {/* Gear Decorations */}
-      <HeroGearDecoration />
-
-      {/* Content Overlay */}
-      <div className="relative z-10 container mx-auto px-4 lg:px-8 h-full flex flex-col justify-center">
-        <div className={`max-w-4xl transition-all duration-500 ${isTransitioning ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"}`}>
-          <h1 className="text-5xl md:text-7xl font-extrabold mb-8 leading-[1.1] tracking-tighter text-white">
-            {slides[currentSlide]?.title?.split("Quality Transmission").map((part, i, arr) => (
-              <span key={i}>
-                {part}
-                {i !== arr.length - 1 && <span className="bg-gradient-to-r from-brand-yellow to-yellow-200 bg-clip-text text-transparent">Quality Transmission</span>}
-              </span>
+          <g transform="translate(50,50)">
+            {Array.from({ length: 14 }).map((_, i) => (
+              <rect key={i} x="-4" y="-48" width="8" height="11" rx="2" fill="white" transform={`rotate(${i * (360 / 14)})`} />
             ))}
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-2xl font-medium leading-relaxed tracking-wide">
-            {slides[currentSlide]?.subtitle}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-5">
-            <Link href="/products" className="group bg-brand-gradient text-brand-black font-extrabold px-8 py-4 rounded-full hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 shadow-[0_0_30px_rgba(250,204,21,0.3)] hover:shadow-[0_0_40px_rgba(34,197,94,0.4)]">
-              Explore Products <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link href="/contact" className="bg-white/5 backdrop-blur-md text-white font-bold px-8 py-4 rounded-full hover:bg-white/15 transition-all duration-300 border border-white/10 flex items-center justify-center">
-              Contact Us
-            </Link>
+            <circle r="37" fill="white" />
+            <circle r="30" fill="transparent" stroke="white" strokeWidth="1" />
+            <circle r="10" fill="white" />
+          </g>
+        </svg>
+      </div>
+
+      <div className="container mx-auto px-6 lg:px-12 h-full flex flex-col md:flex-row items-center relative z-10 py-12 md:py-0">
+        
+        {/* Left Side: Content */}
+        <div className="w-full md:w-1/2 flex flex-col justify-center h-full order-2 md:order-1 mt-12 md:mt-0">
+          <div className={`max-w-2xl transition-opacity duration-700 ease-in-out ${isTransitioning ? "opacity-0" : "opacity-100"}`}>
+            
+            {/* Badges */}
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+              {currentProduct.category && (
+                <Link href={`/categories/${currentProduct.category.slug}`} className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-brand-yellow bg-brand-yellow/10 border border-brand-yellow/20 px-4 py-1.5 rounded-full hover:bg-brand-yellow/20 transition-colors">
+                  {currentProduct.category.name}
+                </Link>
+              )}
+              {currentProduct.brand && (
+                <Link href={`/brands/${currentProduct.brand.slug}`} className="inline-block text-xs font-bold tracking-[0.1em] uppercase text-white bg-white/10 border border-white/20 px-4 py-1.5 rounded-full hover:bg-white/20 transition-colors">
+                  {currentProduct.brand.name}
+                </Link>
+              )}
+            </div>
+
+            {/* Title */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-[1.15] tracking-tight text-white drop-shadow-lg">
+              {currentProduct.name}
+            </h1>
+            
+            {/* Description */}
+            <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-xl font-medium leading-relaxed tracking-wide line-clamp-3">
+              {currentProduct.description}
+            </p>
+            
+            {/* Actions */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              {hasProducts && (
+                <Link 
+                  href={`/products/${currentProduct.slug}`} 
+                  className="group bg-brand-gradient text-brand-black font-extrabold px-8 py-4 rounded-full hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 shadow-[0_0_30px_rgba(250,204,21,0.3)] hover:shadow-[0_0_40px_rgba(34,197,94,0.4)]"
+                >
+                  View Product <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              )}
+              {hasProducts && currentProduct.category && (
+                <Link 
+                  href={`/categories/${currentProduct.category.slug}`} 
+                  className="bg-white/10 backdrop-blur-md text-white font-bold px-8 py-4 rounded-full hover:bg-white/20 transition-all duration-300 border border-white/10 flex items-center justify-center shadow-lg"
+                >
+                  View Category
+                </Link>
+              )}
+            </div>
           </div>
         </div>
+
+        {/* Right Side: Image Showcase */}
+        <div className="w-full md:w-1/2 flex items-center justify-center h-full order-1 md:order-2">
+          <div className="relative w-full max-w-lg aspect-square flex items-center justify-center">
+            {/* Glowing backdrop for image */}
+            <div className="absolute inset-0 bg-brand-yellow/20 rounded-full blur-[100px] -z-10"></div>
+            
+            <div className={`relative w-full h-full p-8 transition-opacity duration-700 ease-in-out flex items-center justify-center ${
+              isTransitioning ? "opacity-0" : "opacity-100"
+            }`}>
+              {imageUrl !== "/logo.png" ? (
+                <img 
+                  src={imageUrl} 
+                  alt={currentProduct.name}
+                  className="max-w-full max-h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] transform hover:scale-110 transition-transform duration-700"
+                />
+              ) : (
+                <div className="w-full h-full bg-white/5 border border-white/10 rounded-3xl flex items-center justify-center flex-col gap-4 text-white/50 backdrop-blur-sm">
+                  <Box className="w-24 h-24" />
+                  <span className="font-medium tracking-wider uppercase">Premium Quality</span>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
       </div>
       
       {/* Indicators */}
-      <div className="absolute bottom-10 left-0 right-0 flex justify-center gap-3 z-20">
-        {slides.map((_, idx) => (
-          <button 
-            key={idx}
-            onClick={() => setCurrentSlide(idx)}
-            className={`h-1.5 rounded-full transition-all duration-500 ${idx === currentSlide ? "bg-brand-yellow w-12 shadow-[0_0_10px_rgba(250,204,21,0.8)]" : "bg-white/30 hover:bg-white/60 w-6"}`}
-            aria-label={`Go to slide ${idx + 1}`}
-          />
-        ))}
-      </div>
+      {slides.length > 1 && (
+        <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-3 z-20">
+          {slides.map((_, idx) => (
+            <button 
+              key={idx}
+              onClick={() => {
+                setIsTransitioning(true);
+                setTimeout(() => {
+                  setCurrentSlide(idx);
+                  setIsTransitioning(false);
+                }, 400);
+              }}
+              className={`h-1.5 rounded-full transition-all duration-500 ${idx === currentSlide ? "bg-brand-yellow w-12 shadow-[0_0_10px_rgba(250,204,21,0.8)]" : "bg-white/30 hover:bg-white/60 w-6"}`}
+              aria-label={`Go to slide ${idx + 1}`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

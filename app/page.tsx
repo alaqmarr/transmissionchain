@@ -138,7 +138,7 @@ export default async function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       {/* Hero Section */}
-      <HeroCarousel heroImages={heroImages} />
+      <HeroCarousel products={products.slice(0, 5)} />
 
       {/* Trust Badges */}
       <section className="w-full py-8 border-b border-gray-100 bg-white relative z-10 -mt-2">

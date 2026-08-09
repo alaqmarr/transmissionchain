@@ -22,8 +22,8 @@ export default function Navbar() {
   ];
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 px-4 pt-4 sm:px-6 lg:px-8">
-      <header className="mx-auto max-w-6xl bg-white/80 backdrop-blur-xl border border-white/40 shadow-glass rounded-full px-6 h-16 flex items-center justify-between transition-all duration-300 relative z-50">
+    <div className="fixed top-0 left-0 right-0 z-50">
+      <header className="w-full bg-white/90 backdrop-blur-xl border-b border-gray-200/50 shadow-sm px-4 sm:px-8 lg:px-12 h-20 flex items-center justify-between transition-all duration-300 relative z-50">
         <Link href="/" className="flex items-center gap-2 group" onClick={() => setIsMobileMenuOpen(false)}>
           <Image src="/logo.png" alt="Transmission Centre" width={36} height={36} className="group-hover:scale-110 transition-transform duration-300" />
           <span className="font-extrabold text-xl tracking-tighter bg-gradient-to-r from-brand-black to-gray-600 bg-clip-text text-transparent">Transmission</span>
