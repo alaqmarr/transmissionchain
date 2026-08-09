@@ -53,9 +53,9 @@ export default function HeroCarousel({ products = [] }: { products?: Product[] }
       className="relative w-full min-h-[700px] md:h-[85vh] overflow-hidden bg-cover bg-center pt-20"
       style={{ backgroundImage: 'url(/1.jpeg)' }}
     >
-      {/* Subtle yellow gradient overlay for readability and styling */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#05110c] via-[#092218]/80 to-[#ca8a04]/20 pointer-events-none z-0 mix-blend-multiply"></div>
-      <div className="absolute inset-0 bg-black/40 pointer-events-none z-0"></div>
+      {/* Subtle gradient overlay: darker on the left for text readability, mostly transparent on the right to show the background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#061b11]/95 via-[#061b11]/70 to-[#ca8a04]/20 pointer-events-none z-0"></div>
+      <div className="absolute inset-0 bg-black/30 md:bg-black/10 pointer-events-none z-0"></div>
       {/* Decorative gears */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         <svg
