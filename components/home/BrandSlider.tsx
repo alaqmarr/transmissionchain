@@ -18,7 +18,7 @@ export default function BrandSlider({ brands }: { brands: any[] }) {
             <Link 
               key={`${brand.id}-${i}`} 
               href={`/brands/${brand.slug}`}
-              className="flex-none w-40 h-20 relative grayscale hover:grayscale-0 transition-all opacity-60 hover:opacity-100"
+              className="flex-none w-40 h-20 relative transition-transform hover:scale-110"
             >
               {brand.image ? (
                 <img 
